@@ -17,7 +17,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["https://task-mangement-frontend-e852.vercel.app", "http://localhost:3000", "http://localhost:3001"],
+    origin: ["https://task-mangement-frontend-ov4t.vercel.app/", "http://localhost:3000", "http://localhost:3001"],
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })
