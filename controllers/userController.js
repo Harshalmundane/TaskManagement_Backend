@@ -96,6 +96,7 @@ const logoutUser = (req, res) => {
 //   }
 // });
 
+
 const getTeamList = asyncHandler(async (req, res) => {
   const { search } = req.query;
   let query = {};
@@ -112,7 +113,7 @@ const getTeamList = asyncHandler(async (req, res) => {
     query = { ...query, ...searchQuery };
   }
 
-  const user = await User.find(query).select("name title role email isActive");
+  const user = await User.find(query).select("name title role email isAdmin isActive");
 
   res.status(201).json(user);
 });
@@ -130,6 +131,8 @@ const getNotificationsList = asyncHandler(async (req, res) => {
 
   res.status(200).json(notice);
 });
+
+
 
 // @GET  - get user task status
 const getUserTaskStatus = asyncHandler(async (req, res) => {
@@ -184,6 +187,10 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     // user.email = req.body.email || user.email;
     user.title = req.body.title || user.title;
     user.role = req.body.role || user.role;
+    if (req.body.isAdmin !== undefined) {
+      user.isAdmin = req.body.isAdmin;
+      console.log('Updating isAdmin to:', user.isAdmin);
+    }
 
     const updatedUser = await user.save();
 
